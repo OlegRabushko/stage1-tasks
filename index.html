@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,6 +11,7 @@
   <link href="style.css" rel="stylesheet" />
   <title>photo-filter</title>
 </head>
+
 <body>
   <header class="header">
     <h1 class="header-title">Photo-filter</h1>
@@ -53,16 +55,21 @@
         <button class="btn btn-save">Save picture</button>
       </div>
       <img src="assets/img/img.jpg" alt="image" />
+      <div class="img__container"></div>
     </div>
   </main>
+  <canvas></canvas>
   <footer class="footer">
     <div class="footer-container">
-      <a class="github" href="#" target="_blank" rel="noopener noreferrer">github</a>
-      <a class="rss" href="https://rs.school/js/" target="_blank" rel="noopener">
-        <span class="rss-year">'21</span>
+      <a class="github" href="https://github.com/OlegRabushko" target="_blank" rel="noopener noreferrer">Rabushko Oleg
       </a>
+      <div class="rss" target="_blank" rel="noopener">
+        <span class="rss-year">'21</span>
+      </div>
     </div>
   </footer>
-  <button class="fullscreen openfullscreen"></button>
+  <button class="fullscreen openfullscreen"><img class="img" src="./assets/svg/fullscreen-open.svg" alt=""></button>
+  <script src="./app.js"></script>
 </body>
+
 </html>
