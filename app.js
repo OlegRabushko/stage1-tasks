@@ -27,7 +27,11 @@ const filterValues = {
   invert: '0',
   sepia: '0',
   saturate: '100',
-  hue: '0'
+  hue: '0',
+  grayscale: '0',
+  opacity: '100',
+  brightness: '100',
+  contrast: '100',
 }
 let number = 0;
 let loadPictureLink = '';
@@ -54,20 +58,23 @@ screen.onclick = () => {
 };
 
 resetBtn.onclick = () => {
-  filterValues.blur = '0'
-  filterValues.invert = '0'
-  filterValues.sepia = '0'
-  filterValues.saturate = '100'
-  filterValues.hue = '0'
+  filterValues.blur = '0';
+  filterValues.invert = '0';
+  filterValues.sepia = '0';
+  filterValues.saturate = '100';
+  filterValues.hue = '0';
+  filterValues.grayscale = '0';
+  filterValues.opacity = '100'
+  filterValues.brightness = '100';
+  filterValues.contrast = '100';
   for (let i = 0; i < outputs.length; i++) {
     const suffix = inputs[i].dataset.sizing || '';
-    document.documentElement.style.setProperty(`--${inputs[i].name}`, i === 3 ? inputs[i].min = 100 + suffix : inputs[i].min = 0 + suffix)
-    i === 3 ? inputs[i].value = 100 : inputs[i].value = 0;
-    i === 3 ? outputs[i].value = 100 : outputs[i].value = 0;
+    document.documentElement.style.setProperty(`--${inputs[i].name}`, i === 3 || i === 6 || i === 7 || i === 8 ? inputs[i].min = 100 + suffix : inputs[i].min = 0 + suffix)
+    i === 3 || i === 6 || i === 7 || i === 8 ? inputs[i].value = 100 : inputs[i].value = 0;
+    i === 3 || i === 6 || i === 7 || i === 8 ? outputs[i].value = 100 : outputs[i].value = 0;
+    drawImage();
   }
-  drawImage();
 }
-
 nextPicture.onclick = () => {
   image.style.display = 'block';
   imageContainer.style.display = 'none';
@@ -91,7 +98,7 @@ function loadImg() {
     const img = new Image();
     img.src = reader.result;
     imageContainer.innerHTML = '';
-    imageContainer.append(img)
+    imageContainer.append(img);
     loadPictureLink = img.src;
     drawImage();
   }
@@ -105,22 +112,23 @@ function drawImage() {
   img.onload = function () {
     canvas.width = img.width;
     canvas.height = img.height;
-    const objFilterKey = Object.keys(filterValues);
     const objFilterVal = Object.values(filterValues);
     const filtersString = `
-  ${objFilterKey[0]}(${canvas.width >= canvas.height ? canvas.width / 670 * objFilterVal[0] : canvas.height / 520 * objFilterVal[0]}${'px'})
-  ${objFilterKey[1]}(${objFilterVal[1]}${'%'})
-  ${objFilterKey[2]}(${objFilterVal[2] / 100})
-  ${objFilterKey[3]}(${objFilterVal[3]}${'%'})
-  ${objFilterKey[4]}-rotate(${objFilterVal[4]}${'deg'})
+    blur(${canvas.width >= canvas.height ? canvas.width / 670 * objFilterVal[0] : canvas.height / 520 * objFilterVal[0]}px)
+    invert(${objFilterVal[1]}%)
+    sepia(${objFilterVal[2] / 100})
+    saturate(${objFilterVal[3]}%)
+    hue-rotate(${objFilterVal[4]}deg)
+    grayscale(${objFilterVal[5]}%)
+    opacity(${objFilterVal[6]}%)
+    brightness(${objFilterVal[7]}%)
+    contrast(${objFilterVal[8]}%)
   `
     const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
     ctx.filter = filtersString;
     ctx.drawImage(img, 0, 0);
   };
 }
-
 saveBtn.onclick = () => {
   var link = document.createElement('a');
   link.download = 'download.png';
