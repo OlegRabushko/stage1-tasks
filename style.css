@@ -92,6 +92,9 @@ output {
   border-radius: 2px;
   transition: 0.3s;
 }
+.color-output {
+  width: 80px;
+}
 .btn-container {
   margin-bottom: 20px;
   padding: 2px;
@@ -167,15 +170,22 @@ output {
   --sepia: 0%;
   --saturate: 100%;
   --hue: 0deg;
+  --grayscale: 0%;
+  --opacity: 100%;
+  --brightness: 100%;
+  --contrast: 100%;
 }
+
 .editor img {
   height: 100%;
   width: 100%;
+  margin: auto;
   max-height: 520px;
-  max-width: 830px;
+  max-width: 670px;
   object-fit: contain;
   filter: blur(var(--blur, 0px)) invert(var(--invert, 0%)) sepia(var(--sepia, 0%)) saturate(var(--saturate, 100%))
-    hue-rotate(var(--hue, 0deg));
+    hue-rotate(var(--hue, 0deg)) grayscale(var(--grayscale, 0%)) opacity(var(--opacity, 0%))
+    brightness(var(--brightness, 0%)) contrast(var(--contrast, 0%));
 }
 
 .img {
